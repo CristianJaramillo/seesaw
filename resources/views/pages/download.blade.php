@@ -27,7 +27,7 @@
 		            	<td>{{ $doc->name }}</td>
 		            	<td>{{ $doc->created_at }}</td>
 		            	<td>
-			            	<a class="btn-floating btn-large waves-effect waves-light red" href="{{ url('/docs/' . $doc->name) }}"><i class="material-icons">cloud_download</i></a>
+			            	<a class="btn-floating btn-large waves-effect waves-light red" href="{{ url('/docs/' . $doc->name) }}" target="blanck"><i class="material-icons">cloud_download</i></a>
 			    		</td>			    		
 		          	</tr>
 
