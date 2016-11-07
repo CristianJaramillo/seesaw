@@ -19,3 +19,5 @@ Route::get('upload', 'HomeController@upload')->name('upload');
 Route::get('sign-in', 'HomeController@signIn')->name('sign-in');
 
 Route::get('sign-up', 'HomeController@signUp')->name('sign-up');
+
+Route::post('store', 'HomeController@store')->name('store');

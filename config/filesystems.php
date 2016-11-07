@@ -43,6 +43,12 @@ return [
 
     'disks' => [
 
+        'docs' => [
+            'driver' => 'local',
+            'root' => public_path('docs'),
+            'visibility' => 'public',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

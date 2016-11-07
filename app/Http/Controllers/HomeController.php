@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Doc;
 use Illuminate\Http\Request;
+use Storage;
 
 class HomeController extends Controller
 {
@@ -32,10 +34,13 @@ class HomeController extends Controller
 			'layout' => 'layouts.default',
 			'title'  => 'Inicio',
 			'author' => 'Luis Rojas',
-			'description' => 'Toda tu escuela en un solo lugar'
+			'description' => 'Toda tu escuela en un solo lugar',
+			'content' => 'pages.download'
 		];
 		
-		return view('start', compact('page'));
+		$docs = Doc::all();
+
+		return view('start', compact('page', 'docs'));
     }
 
     /**
@@ -47,7 +52,8 @@ class HomeController extends Controller
 			'layout' => 'layouts.default',
 			'title'  => 'Inicio',
 			'author' => 'Luis Rojas',
-			'description' => 'Toda tu escuela en un solo lugar'
+			'description' => 'Toda tu escuela en un solo lugar',
+			'content' => 'pages.upload'
 		];
 		
 		return view('start', compact('page'));
@@ -83,5 +89,23 @@ class HomeController extends Controller
 		return view('start', compact('page'));
     }
 
+    /**
+     *
+     */
+    public function store(Request $request)
+    {
+
+    	$doc = $request->file('upload_doc');
+
+    	$newDoc = new Doc();
+
+    	$newDoc->name = $doc->getClientOriginalName();
+
+    	$newDoc->save();
+
+        Storage::disk('docs')->put($newDoc->name, file_get_contents($doc->getRealPath()));
+
+    	return redirect('download');
+    }
 
 }
